@@ -87,7 +87,7 @@ map <silent> <leader><space> :nohlsearch<cr>
 imap jj <Esc>
 
 " Nerdtree Configuration
-map <C-b> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
