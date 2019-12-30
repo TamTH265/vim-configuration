@@ -8,6 +8,16 @@ Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
+" Enable Alt key
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+set timeout ttimeoutlen=50
+
 " Enable 24-bit color
 if (empty($TMUX))
   if (has("nvim"))
@@ -94,6 +104,14 @@ nnoremap W $
 nnoremap $ <nop>
 nnoremap ^ <nop>
 nnoremap 0 <nop>
+
+" Line moving
+nnoremap <A-j> :m +1<CR>==
+nnoremap <A-k> :m -2<CR>==
+inoremap <A-j> <Esc>:m +1<CR>==gi
+inoremap <A-k> <Esc>:m -2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Vim-airline Configuration
 let g:airline#extensions#tabline#enabled = 1
