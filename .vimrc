@@ -2,16 +2,31 @@
 call plug#begin('~/.vim/plugged')
     
 Plug 'scrooloose/nerdtree'
+Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
+" Enable 24-bit color
+if (empty($TMUX))
+  if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
 " Basic Configuration 
+syntax enable 
+colorscheme onedark
 set relativenumber
 set cursorline
 hi cursorline cterm=none term=none
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
-highlight CursorLine guibg=#303000 ctermbg=236
+" highlight CursorLine guibg=#303000 ctermbg=236
 set showcmd
 filetype indent on
 set wildmenu
@@ -19,25 +34,22 @@ set lazyredraw
 set ttyfast
 set laststatus=2
 set autoindent
-
-" Enable syntax highlighting
-syntax enable 
-
-" Enable 256 colors palette in Gnome Terminal
 set t_Co=256
-
-" No backup file
 set nobackup
 set noswapfile
 set noundofile
 set nowritebackup
-
-" Tab size 
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
+set ruler
+set smartcase
+set hlsearch
+set incsearch 
+set magic
+set encoding=utf8
 
 " Leader key 
 let mapleader = ","
@@ -47,30 +59,6 @@ nmap <leader>w :w!<cr>
 
 " Fast quitting
 nmap <leader>q :q<cr>
-
-" Always show current position
-set ruler
-
-" Ignore case when searching
-set ignorecase
-
-" When searching try to be smart about cases 
-set smartcase
-
-" Highlight search results
-set hlsearch
-
-" Makes search act like search in modern browsers
-set incsearch 
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch 
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
@@ -106,3 +94,8 @@ nnoremap W $
 nnoremap $ <nop>
 nnoremap ^ <nop>
 nnoremap 0 <nop>
+
+" Vim-airline Configuration
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
