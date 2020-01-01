@@ -5,6 +5,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
+Plug 'valloric/youcompleteme'
+Plug 'dense-analysis/ale'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 call plug#end()
 
@@ -49,9 +52,6 @@ set nobackup
 set noswapfile
 set noundofile
 set nowritebackup
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 set expandtab
 set smarttab
 set ruler
@@ -59,7 +59,15 @@ set smartcase
 set hlsearch
 set incsearch 
 set magic
-set encoding=utf8
+set encoding=utf-8
+
+" Set tab space for specific languages
+autocmd Filetype python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype html setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2 
+autocmd Filetype css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " Leader key 
 let mapleader = ","
@@ -116,4 +124,19 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 " Vim-airline Configuration
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" Fzf Configuration
+set rtp+=~/.fzf
+
+" Youcompleteme Configuraion
+set completeopt-=preview
+let g:ycm_semantic_triggers =  { 'c,cpp,php,python,javascript,typescript': [ 're!\w{2}' ] }
+let g:ycm_show_diagnostics_ui = 0
+
+" ALE Configuration
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️ '
 
